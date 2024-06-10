@@ -104,9 +104,9 @@ jobs:
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           unzip -q main/YouTube.ipa -d main/tmp
           echo "YT_VERSION=$(grep -A 1 '<key>CFBundleVersion</key>' main/tmp/Payload/YouTube.app/Info.plist | grep '<string>' | awk -F'[><]' '{print $3}')" >> $GITHUB_ENV
-          wget "https://api.github.com/repos/dayanch96/YTLite/releases/latest" -O main/tmp/ytlite.json
-          YTLITE_VERSION=$(jq -r '.tag_name | ltrimstr("v")' main/tmp/ytlite.json)
-          echo $YTLITE_VERSION   
+          wget -qO- https://github.com/dayanch96/YTLite/releases/latest > main/tmp/release_page.html
+          YTLITE_VERSION=$(grep -o -E '/tag/v[^"]+' main/tmp/release_page.html | head -n 1 | sed 's/\/tag\/v//')
+          echo $YTLITE_VERSION
           rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
           cp -R main/Extensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
