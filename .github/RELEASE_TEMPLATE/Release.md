@@ -18,4 +18,4 @@ Current App Compatibility: `iOS/iPadOS 15.0` or later
 - Hiding Shorts creates an empty space instead #55
 
 ### Catbox
-%catbox_url%
+`%catbox_url%`
