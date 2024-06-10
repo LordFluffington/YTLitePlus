@@ -107,6 +107,7 @@ jobs:
           wget -qO- https://github.com/dayanch96/YTLite/releases/latest > main/tmp/release_page.html
           YTLITE_VERSION=$(grep -o -E '/tag/v[^"]+' main/tmp/release_page.html | head -n 1 | sed 's/\/tag\/v//')
           echo "YTLITE_VERSION=${YTLITE_VERSION}" >> $GITHUB_ENV
+          echo $YTLITE_VERSION
           rm -rf main/tmp/Payload/YouTube.app/_CodeSignature/CodeResources
           rm -rf main/tmp/Payload/YouTube.app/PlugIns/*
           cp -R main/Extensions/*.appex main/tmp/Payload/YouTube.app/PlugIns
